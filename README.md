@@ -1,3 +1,3 @@
-# Excercises, Challanges and Notes from crafting-interpreters
+# My challanges resolutions from Crafting Interpreters
 
 Repository with study material used while read Crafting Interpreters
