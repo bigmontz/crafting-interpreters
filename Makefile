@@ -1,7 +1,12 @@
 .DEFAULT_GOAL = help
+DIR := c
+C_TEST_SOURCES := $(wildcard $(DIR)/*_test.c)
+C_MAIN := c/main.c
+C_APPLICATION_SOURCES := $(filter-out $(wildcard $(DIR)/*_test.c),$(wildcard $(DIR)/*.c))
+C_SOURCES := $(filter-out $(C_MAIN),$(C_APPLICATION_SOURCES))
 
 .PHONY: all
-all: java-build ## Build and test the interpreters
+all: java-build c-build ## Build and test the interpreters
 
 .PHONY: java-build
 java-build: ## Build the Java Interpreter
@@ -10,6 +15,25 @@ java-build: ## Build the Java Interpreter
 .PHONY: java-run 
 java-run: ## Run the Java Interpreter
 	java -jar ./java/target/lox-0.0.0-SNAPSHOT.jar
+
+.PHONY: c-clean
+c-clean: ## Clean the C Interpreter files
+	test -s c/target && rm -fr c/target
+	mkdir c/target
+
+.PHONY: c-test
+c-test: $(C_SOURCES) $(C_TEST_SOURCES) c-clean ## Test the C Interpreter
+	$(foreach test,$(C_TEST_SOURCES), gcc -Werror -o c/target/test $(test) $(C_SOURCES); chmod +X c/target/test; ./c/target/test)
+
+
+.PHONY: c-build 
+c-build: $(C_APPLICATION_SOURCES) c-test c-clean ## Build the C Interpreter
+	gcc -o c/target/lox $(C_APPLICATION_SOURCES)
+	chmod +X c/target/lox
+
+.PHONY: c-run 
+c-run: ## Run the C Interpreter
+	./c/target/lox
 
 # based on: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Shows this message

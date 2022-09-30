@@ -23,3 +23,20 @@ gnu make: 3.81
 
 - `make java-build` builds the project
 - `make java-run` runs the project
+
+### `/c`
+
+The project with the C implementation of the interpreter builded during the course.
+This is the more performant version of the interpreter.
+
+#### Dependency
+
+```
+gcc: 4.2.1
+gnu make: 3.81
+```
+
+#### Commands
+
+- `make c-build` builds the project
+- `make c-run` runs the project
