@@ -6,14 +6,24 @@
     if (!(test))                 \
       return message;            \
   } while (0)
-#define mu_run_test(test)   \
-  do                        \
-  {                         \
-    char *message = test(); \
-    tests_run++;            \
-    if (message)            \
-      return message;       \
-  } while (0)
+#define mu_run_test(description, test) \
+  do                                   \
+  {                                    \
+    printf("\t");                      \
+    printf(description);               \
+    printf("...");                     \
+    char *message = test();            \
+    tests_run++;                       \
+    if (message)                       \
+    {                                  \
+      puts("\033[0;31mFAIL\033[0m");   \
+      printf("\t\t Reason: ");         \
+      puts(message);                   \
+      return message;                  \
+    }                                  \
+    puts(" \033[0;32mOK\033[0m");      \
+  } while (0);
+
 extern int tests_run;
 
 #define mu_test_suite(name, run_tests)    \
@@ -23,11 +33,7 @@ extern int tests_run;
     printf("Running ");                   \
     puts(name);                           \
     char *result = run_tests();           \
-    if (result != 0)                      \
-    {                                     \
-      printf("%s\n", result);             \
-    }                                     \
-    else                                  \
+    if (result == 0)                      \
     {                                     \
       printf("ALL TESTS PASSED\n");       \
     }                                     \
