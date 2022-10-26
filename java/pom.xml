@@ -23,7 +23,7 @@
             <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>bmz.crafting.interpreters.lox.Application</mainClass>
+                <mainClass>com.craftinginterpreters.lox.Lox</mainClass>
             </manifest>
             </archive>
         </configuration>
