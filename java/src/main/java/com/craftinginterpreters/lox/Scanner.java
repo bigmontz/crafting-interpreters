@@ -80,6 +80,9 @@ class Scanner {
         if (match('/')) {
           // A comment goes until the end of the line.
           while (peek() != '\n' && !isAtEnd()) advance();
+        } else if (match('*')) {
+          // A c-like comment goes until find '*/'
+          while (peek() != '*' && peekNext() != '/' && !isAtEnd()) advance();
         } else {
           addToken(SLASH);
         }
