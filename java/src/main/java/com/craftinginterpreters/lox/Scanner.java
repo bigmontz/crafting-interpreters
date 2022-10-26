@@ -80,6 +80,8 @@ class Scanner {
         if (match('/')) {
           // A comment goes until the end of the line.
           while (peek() != '\n' && !isAtEnd()) advance();
+        } else if (match('*')) {
+          cLikeComments();
         } else {
           addToken(SLASH);
         }
@@ -106,6 +108,19 @@ class Scanner {
           Lox.error(line, "Unexpected character.");
         }
         break;
+    }
+  }
+
+  private void cLikeComments() {
+    // A c-like comment goes until find '*/'
+    int openComments = 1;
+    while (openComments > 0 && !isAtEnd()) {
+      if (match('*') && peek() == '/') {
+        openComments--;
+      } else if (match('/') && peek() == '*') {
+        openComments++;
+      }
+      advance();
     }
   }
 
