@@ -22,6 +22,10 @@ java-run: ## Run the Java Interpreter
 java-tool-run: ## Run the Java Tool
 	java -cp ./java/target/lox-0.0.0-SNAPSHOT.jar com.craftinginterpreters.tool.GenerateAst $(JAVA_BASE_PACKAGE_DIR)
 
+.PHONY: java-astrpnprinter-run 
+java-astrpnprinter-run : ## Run the Java Tool
+	java -cp ./java/target/lox-0.0.0-SNAPSHOT.jar com.craftinginterpreters.lox.AstRPNPrinter
+
 
 .PHONY: c-clean
 c-clean: ## Clean the C Interpreter files
