@@ -8,7 +8,7 @@ JAVA_BASE_PACKAGE_DIR := java/src/main/java/com/craftinginterpreters/lox
 RUN_PARAMS=''
 
 .PHONY: all
-all: java-build c-build ## Build and test the interpreters
+all: java-build c-build elixir-build ## Build and test the interpreters
 
 .PHONY: java-build
 java-build: ## Build the Java Interpreter
