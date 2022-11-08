@@ -26,4 +26,4 @@ elox-*.tar
 /tmp/
 
 # elox bin
-elox
+/elox
