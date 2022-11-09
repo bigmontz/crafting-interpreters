@@ -5,7 +5,7 @@ C_MAIN := c/main.c
 C_APPLICATION_SOURCES := $(filter-out $(wildcard $(DIR)/*_test.c),$(wildcard $(DIR)/*.c))
 C_SOURCES := $(filter-out $(C_MAIN),$(C_APPLICATION_SOURCES))
 JAVA_BASE_PACKAGE_DIR := java/src/main/java/com/craftinginterpreters/lox
-RUN_PARAMS=''
+RUN_PARAMS := ''
 
 .PHONY: all
 all: java-build c-build elixir-build ## Build and test the interpreters
@@ -16,7 +16,7 @@ java-build: ## Build the Java Interpreter
 
 .PHONY: java-run 
 java-run: ## Run the Java Interpreter
-	java -jar ./java/target/lox-0.0.0-SNAPSHOT.jar $(RUN_PARAMS)
+	java -jar ./java/target/lox-0.0.0-SNAPSHOT.jar$(RUN_PARAMS)
 
 .PHONY: java-tool-run 
 java-tool-run: ## Run the Java Tool
